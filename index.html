@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Sample Chat AI VTuber</title>
+
+    <!-- Pixi to view model -->
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+
+    <link rel="stylesheet" href="aivtuber.css" />
+  </head>
+
+  <body>
+    <div id="vtuber">
+      <!-- <img id="charaImg" src="chara.png" width="auto" height="400" /> -->
+      <canvas id="canvas" style="height: 400px; width: auto"></canvas>
+    </div>
+    <div id="aiResponse" class="aiResponseBox">
+      <p class="ai-response" id="aiResponseUtterance"></p>
+    </div>
+    <div class="bottomBox">
+      <p id="userComment"></p>
+      <button id="startLiveButton" onclick="startLive();">LIVE開始</button>
+      <div id="submit_form">
+        <input type="text" id="utterance" />
+        <button id="sendButton" onclick="onClickSend();">送信</button>
+      </div>
+    </div>
+  </body>
+
+  <!-- Script -->
+  <script src="./aivtuber.js"></script>
+</html>
