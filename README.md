@@ -1,21 +1,25 @@
 # これは何か
 チャット欄に寄せられるコメントに自動で応答をしながら進行をする、AIによるYouTube LIVE配信を行うためのサンプルです。
 
+# 継承元のリポジトリ
+https://github.com/k-masashi/sample-chat-ai-vtuber
+[makunugiさん](https://github.com/k-masashi)さん、ありがとうございます。
+
+このリポジトリは、上記を改良し、Live2Dモデルとおしゃべりできるようにしたものです。
+
 # 準備
 
 AIによる雑談配信を行うためのソースコードはすでに実装済みです。
 下記の準備が必要な項目のみ設定が必要です。
 
-## 1. 画像の用意
-下記の3つの名前の画像を用意し、ルートディレクトリ内に設置してください。
+## 1. Live2Dモデル・背景画像の用意
+背景画像を変更したい場合、`background.png`の画像を別の画像に差し替えてください。
 
-- chara.png
-- chara_blinking.png
-- background.png
+Live2Dモデルを変更したい場合、ルートディレクトリにLive2Dモデルのファイルを設置し、`aivtuber.js`の下記の箇所に入力してください。
 
-※`chara_blinking.png`は瞬きをしているキャラクターの静止画です。
-※`background.png`は背景の画像です。
-画像の名前を変更したい場合は、適宜index.html、aivtuber.js内を変更してください。
+```js
+const modelPath = '<モデルディレクトリ内のmodel3.jsonファイルへのパスを入力してください>';
+```
 
 ## 2. meboのAPIキー・エージェントIDの設定
 [mebo](https://mebo.work)を利用して、会話が可能なAIキャラクターを作成してください。
@@ -72,8 +76,19 @@ const YOUTUBE_DATA_API_KEY = '<YouTube Data APIのAPIキーを入力してくだ
 `index.html`をブラウザで開きましょう。
 ページ下部のテキスト入力欄にコメントを入力し「送信」ボタンを押して、無事応答が返ってくれば成功です。
 
-# LINE開始
+# LIVE開始
 動作確認が完了したら、「LIVE開始」を押しましょう。
 YouTube LIVEのコメントに対して応答を返すようになります。
-[OBS](https://obsproject.com/ja/download)などの画面配信が可能なツールを利用して、AI VTuberを表示しているブラウザのキャプチャをYouTubeに配信しましょう。
 
+[OBS](https://obsproject.com/ja/download)などの画面配信が可能なツールを利用して、AI VTuberを表示しているブラウザのキャプチャをYouTubeに配信しましょう。
+- [解説1 (OBS-Youtube連携)](https://youtu.be/s9ZZAgcLRpY?t=1295)
+- [解説2 (配信設定)](https://youtu.be/s9ZZAgcLRpY?t=1899)
+
+環境によっては、複数出力装置の設定が必要な場合があります。
+AITuberの音がYoutubeで流れないなどの場合、[Youtube解説](https://youtu.be/s9ZZAgcLRpY?t=1644)を参考に、設定をお願いします。
+
+## License
+
+The code in this project is licensed under MIT license. See the [LICENSE](LICENSE) file in this repository.
+
+However, files located in the '/Uniform01_39' directory are a separate matter. These files are proprietary and their reproduction, modification, distribution, or use in any way is strictly forbidden without explicit permission. For more information, see the [LICENSE](Uniform01_39/LICENSE) file in the 'Uniform01_39' directory.

@@ -1,0 +1,36 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "Uniform01_44.moc3",
+		"Textures": [
+			"Uniform01_44.2048/texture_00.png",
+			"Uniform01_44.2048/texture_01.png",
+			"Uniform01_44.2048/texture_02.png",
+			"Uniform01_44.2048/texture_03.png",
+			"Uniform01_44.2048/texture_04.png",
+			"Uniform01_44.2048/texture_05.png",
+			"Uniform01_44.2048/texture_06.png",
+			"Uniform01_44.2048/texture_07.png",
+			"Uniform01_44.2048/texture_08.png",
+			"Uniform01_44.2048/texture_09.png",
+			"Uniform01_44.2048/texture_10.png",
+			"Uniform01_44.2048/texture_11.png",
+			"Uniform01_44.2048/texture_12.png",
+			"Uniform01_44.2048/texture_13.png"
+		],
+		"Physics": "Uniform01_44.physics3.json",
+		"DisplayInfo": "Uniform01_44.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		}
+	]
+}

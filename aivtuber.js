@@ -3,23 +3,23 @@ const MEBO_API_KEY = "";
 const MEBO_AGENT_ID = "";
 
 // TODO: VOICEVOXのURL (デフォルトの設定の場合は変える必要なし)
-const VOICE_VOX_API_URL = "";
+const VOICE_VOX_API_URL = "http://127.0.0.1:50021";
 
 // TODO: ライブ配信するYouTubeのVideoID
 const YOUTUBE_VIDEO_ID = '';
 // TODO: YouTube Data APIを利用可能なAPIKEY
 const YOUTUBE_DATA_API_KEY = '';
 
-// Live2dモデルのフォルダ内にあるmodel3.jsonファイルへのパスを記載
-const modelPath = "./Uniform01_39/Uniform01_39.model3.json";
-
-// VOICEVOXのSpeakerID
-const VOICEVOX_SPEAKER_ID = "10";
-
 // コメントの取得インターバル (ms)
 const INTERVAL_MILL_SECONDS_RETRIEVING_COMMENTS = 10000;
 // QUEUEに積まれたコメントを捌くインターバル (ms)
 const INTERVAL_MILL_SECONDS_HANDLING_COMMENTS = 3000;
+
+// VOICEVOXのSpeakerID
+const VOICEVOX_SPEAKER_ID = "10";
+
+// Live2dモデルのフォルダ内にあるmodel3.jsonファイルへのパスを記載
+const modelPath = "./Uniform01_44/Uniform01_44.model3.json";
 
 var audio = new Audio();
 // 処理するコメントのキュー

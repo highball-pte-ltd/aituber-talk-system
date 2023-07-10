@@ -38,6 +38,7 @@ div {
     text-align: center;
     font-size: 24px;
     margin: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #typewriter::after {
