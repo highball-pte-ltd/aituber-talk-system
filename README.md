@@ -3,6 +3,7 @@
 
 # 継承元のリポジトリ
 https://github.com/k-masashi/sample-chat-ai-vtuber
+
 [makunugiさん](https://github.com/k-masashi)さん、ありがとうございます。
 
 このリポジトリは、上記を改良し、Live2Dモデルとおしゃべりできるようにしたものです。
