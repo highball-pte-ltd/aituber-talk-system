@@ -37,6 +37,9 @@ var nextPageToken = "";
 // コメントの取得が開始されているかどうかのフラグ
 var isLiveCommentsRetrieveStarted = true;
 
+// lipSync value
+let lipSyncValue = 0;
+
 const getLiveChatId = async () => {
   const response = await fetch(
     "https://youtube.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=" +
@@ -143,8 +146,45 @@ const playVoice = async (inputText) => {
   const blob = await response.blob();
   const audioSourceURL = window.URL || window.webkitURL;
   audio = new Audio(audioSourceURL.createObjectURL(blob));
+
+  // リップシンク処理
+  let intervalId;
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (AudioContext) {
+    const context = new AudioContext();
+    const source = context.createMediaElementSource(audio);
+    const analyser = context.createAnalyser();
+
+    analyser.fftSize = 32;
+    const bufferLength = analyser.frequencyBinCount;
+    let cache = [];
+    let lastTime = Date.now();
+    intervalId = setInterval(() => {
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+      const value =
+        (dataArray[8] + dataArray[9] + dataArray[10] + dataArray[11]) / 4;
+      if (Date.now() - lastTime < 33) {
+        cache.push(value);
+      } else {
+        const lipValue = cache.length
+          ? cache.reduce((previous, current) => (current += previous)) /
+            cache.length /
+            100
+          : lipSyncValue;
+        lipSyncValue = lipValue;
+        lastTime = Date.now();
+        cache = [];
+      }
+    }, 0);
+    source.connect(analyser);
+    analyser.connect(context.destination);
+  }
+
   audio.onended = function () {
     setTimeout(handleNewLiveCommentIfNeeded, 1000);
+    clearInterval(intervalId);
+    lipSyncValue = 0;
   };
   audio.play();
 };
@@ -363,7 +403,7 @@ async function main() {
   const app = new PIXI.Application({
     view: canvas,
     autoStart: true,
-    resizeTo: window,
+    resizeTo: canvas,
     backgroundAlpha: 0,
   });
 
@@ -371,10 +411,17 @@ async function main() {
     autoInteract: false,
   });
 
-  const scale = (window.innerHeight / model.internalModel.originalHeight) * 2.5;
+  const scale = (canvas.width / model.internalModel.originalHeight) * 2;
   model.scale.set(-scale, scale);
   // model.anchor.set(0.5, 0);
-  model.position.set(window.innerWidth, 0);
+  model.position.set(canvas.width, 0);
   app.stage.addChild(model);
+
+  model.internalModel.motionManager.update = () => {
+    model.internalModel.coreModel.setParameterValueById(
+      "ParamMouthOpenY",
+      lipSyncValue
+    );
+  };
 }
 main();
